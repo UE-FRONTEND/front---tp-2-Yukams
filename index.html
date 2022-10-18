@@ -24,20 +24,105 @@
     <a class="navbar-brand" href="#">TP2 Frontend</a>
 </nav>
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <div class="container theme-showcase" role="main" style="width: 100%">
     <div id="app">
-        <br/>
-        <!-- TODO -->
+        <ul id="list" class="list">
+            <div v-for="item in items">
+                <div class="box">
+                    <img src={{item.pictureUrl}}></img>
+                    <div>{{item.name}} ({{item.quantity}})</div>
+                    <div>{{item.desc}}</div>
+                    <div class="buttonBox">
+                        <button class="addButton" onclick="addItem(item)">Ajouter</button>
+                        <button class="deleteButton" @onclick="deleteItem(item)">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </ul>
     </div>
 </div>
+
 <script>
     new Vue({
         el: "#app",
         data: {
-            ingredients: [/* todo */],
+            items: [
+                {
+                    name: "Pain",
+                    quantity: 0,
+                    description: "Pain fait maison, mais un peu surgelé quand même",
+                    picture: null
+                },
+                {
+                    name: "Tomate",
+                    quantity: 0,
+                    description: "Tomate du jardin dans la cave et contaminée à l'uranium",
+                    picture: null
+                },
+                {
+                    name: "Salade",
+                    quantity: 0,
+                    description: "Salade verte plus trop verte, mais qui a été rincée",
+                    picture: null
+                },
+                {
+                    name: "Oignon",
+                    quantity: 0,
+                    description: "Oignon aui ne fait pas pleurer... bizarre, mais pourquoi pas.",
+                    picture: null
+                },
+                {
+                    name: "Steak",
+                    quantity: 0,
+                    description: "Steak OGM, provient d'une vache importée d'on ne sait où",
+                    picture: null
+                }
+            ]
+        },
+        methods: {
+            addItem(item) {
+                console.log(item)
+                item.quantity++;
+            },
+            deleteItem(item) {
+                if(item.quantity >= 0) item.quantity--;
+            }
         }
-        /* TODO */
     });
 </script>
 </body>
 </html>
+
+<style>
+    .list {
+        display: flex;
+        flex-direction: row;
+        height: 400px;
+        width: 100%;
+        background-color: green;
+        padding-left: 5px;
+        padding-right: 5px;
+        justify-content: center;
+
+    }
+
+    .box {
+        margin: 5px;
+        background-color: yellow;
+        height: 200px;
+    }
+
+    .buttonBox {
+        display: flex;
+    }
+
+    .addButton {
+        background-color: aqua;
+    }
+
+    .deleteButton {
+        background-color: red;
+    }
+</style>
